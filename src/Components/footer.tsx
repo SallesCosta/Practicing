@@ -5,9 +5,10 @@ export function Footer() {
     <Box
       w='100%'
       h='50px'
-      mb='0'
+      // position='absolute'
       padding={2}
-      bgGradient='linear(to-r, teal.500, green.200)'
+      bgGradient='linear(to-r, teal.500, green.900)'
+      mb='0'
     >
       <Center><Text>Footer</Text></Center>
     </Box>

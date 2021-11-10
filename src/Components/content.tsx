@@ -4,8 +4,10 @@ export function Content() {
   return (
     <>
       <Box
+        display='flex'
+        flexDir='column'
         w='100%'
-        h='100vh'
+        h='89vh'
       >
         <HStack>
           <Center><Text>Content</Text></Center>
