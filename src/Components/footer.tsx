@@ -8,13 +8,16 @@ import {
   HStack,
 } from '@chakra-ui/react'
 
-export function Footer({ color }: any) {
+type FooterProps = {
+  color: string
+}
+
+export function Footer({ color }: FooterProps) {
   const { toggleColorMode } = useColorMode()
   return (
     <Box
       w='100%'
       h='50px'
-      // position='absolute'
       padding={2}
       bgGradient='linear(to-r, teal.500, green.900)'
       mb='0'

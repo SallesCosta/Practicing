@@ -1,6 +1,11 @@
 import { Box, Center, HStack, Text } from '@chakra-ui/react'
 
-export function Content({ bgColor, color }:any) {
+type ContentProps = {
+  color: string,
+  bgColor: string,
+}
+
+export function Content({ bgColor, color }:ContentProps) {
   return (
     <>
       <Box

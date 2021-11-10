@@ -1,6 +1,10 @@
 import { Box, Center, HStack, Text } from '@chakra-ui/react'
 
-export function Header({ color }: any) {
+type HeaderProps = {
+  color: string,
+}
+
+export function Header({ color }: HeaderProps) {
   return (
     <>
       <Box
