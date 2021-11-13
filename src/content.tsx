@@ -14,6 +14,8 @@ type ContentProps = {
   onHandleChange: ChangeEventHandler<HTMLInputElement>,
   AddItem: MouseEventHandler<HTMLButtonElement> & MouseEventHandler<Element>,
   bgColor: string,
+  bgColor2: string,
+  border: string,
   color: string,
 }
 
@@ -25,6 +27,8 @@ export function Content({
   onHandleChange,
   onHandleDelete,
   bgColor,
+  bgColor2,
+  border,
   color,
 }: ContentProps) {
   return (
@@ -34,20 +38,19 @@ export function Content({
       h='89vh'
       bg={bgColor}
       color={color}
-    // ml='10px'
     >
       <Flex>
         <Sidebar />
         <Tabs isLazy w='100%'>
           <TabList>
-            <Tab>Login</Tab>
             <Tab>GitHub</Tab>
-            <Tab>Estatisticas</Tab>
+            <Tab>Login</Tab>
             <Tab>Card</Tab>
+            <Tab>Estatisticas</Tab>
           </TabList>
           <TabPanels>
-            <TabPanel><LoginForm /></TabPanel>
             <TabPanel><Github /></TabPanel>
+            <TabPanel><LoginForm /></TabPanel>
             <TabPanel>
               <Card
                 value={value}
@@ -56,6 +59,10 @@ export function Content({
                 AddItem={AddItem}
                 handleDelete={onHandleDelete}
                 onHandleChange={onHandleChange}
+                bgColor2={bgColor2}
+                border={border}
+                color={color}
+
               />
             </TabPanel>
 

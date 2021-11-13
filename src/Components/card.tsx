@@ -19,6 +19,9 @@ export type CardProps = {
   handleDelete: (id: string) => void
   onHandleChange: ChangeEventHandler<HTMLInputElement>,
   AddItem: MouseEventHandler<HTMLButtonElement> & MouseEventHandler<Element>,
+  bgColor2: string
+  border: string
+  color: string
 }
 
 export function Card({
@@ -28,9 +31,13 @@ export function Card({
   AddItem,
   handleDelete,
   onHandleChange,
+  bgColor2,
+  border,
 }: CardProps) {
   return (
-    <Box p='18px'>
+    <Box
+      p='18px'
+    >
       <Box
         maxW='500px'
         w='500px'
@@ -38,7 +45,9 @@ export function Card({
         borderWidth='1px'
         borderRadius='lg'
         overflow='hidden'
-        bgColor='whiteAlpha.800'
+        // bgColor='red'
+        bgColor={bgColor2}
+        color='gray.600'
         shadow='lg'
       >
         <Heading
@@ -46,32 +55,39 @@ export function Card({
           borderWidth='1px'
           fontSize='2xl'
           align='center'
-          color='grey'
+          color='gray.600'
         >
           Higher Order Functions
         </Heading>
         <Text
           fontSize='lg'
           align='center'
+          color='gray.600'
         >
           Insira um novo Item
         </Text>
         <Input
-          ref={inputRef}
           onChange={onHandleChange}
-          value={value}
+          borderRadius='inherit'
+          borderWidth='1px'
+          borderColor={border}
           placeholder='escreva aqui'
-          focusBorderColor='lime'
-          variant='filled'
-          size='lg'
+          focusBorderColor='green.400'
+          ref={inputRef}
+          variant='flushed'
           maxLength={34}
+          value={value}
+          bgColor={bgColor2}
+          // bgColor='white'
+          color='gray.600'
           isRequired
+          size='lg'
         />
-        <Divider mb='4' mt='4' maxW='500px' w='500px' />
+        <Divider mb='4' mt='4' maxW='500px' w='100%' />
         <Button
           onClick={AddItem}
           rightIcon={<GrFormAdd />}
-          colorScheme='green'
+          colorScheme='green.400'
           variant='outline'
           size='lg'
           w='100%'

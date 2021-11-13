@@ -6,6 +6,9 @@ import { useHooks } from 'hooks/hooks'
 
 export function App() {
   const bgColor = useColorModeValue('gray.50', 'withealpha.50')
+  const bgColor2 = useColorModeValue('gray.50', '#f0f0f0')
+  const border = useColorModeValue('', 'gray.600')
+
   const color = useColorModeValue('gray.600', 'withealpha.400')
 
   const {
@@ -21,6 +24,8 @@ export function App() {
       <Header color={color} />
       <Content
         bgColor={bgColor}
+        bgColor2={bgColor2}
+        border={border}
         color={color}
         index={index}
         Array={Array}
