@@ -2,7 +2,8 @@
   "name": "lebowski",
   "version": "0.1.0",
   "private": true,
-  "description": "a template with some dependencies  ",
+  "description": "a template with some dependencies ",
+  "main": "App.tsx",
   "scripts": {
     "dev": "react-scripts start",
     "build": "react-scripts build",
