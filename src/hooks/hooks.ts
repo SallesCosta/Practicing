@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, useRef } from 'react'
+import { useState, useEffect, ChangeEvent, useRef, KeyboardEvent } from 'react'
 import { v4 } from 'uuid' // yarn add uuid @types/uuid
 
 export type Lista = {
@@ -14,7 +14,6 @@ export function useHooks() {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    // console.log(Array)
   }, [Array])
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -24,7 +23,6 @@ export function useHooks() {
   const handleDelete = (id: string) => {
     return setArray(prevstate => prevstate.filter(item => (item.id !== id)))
   }
-
 
   const AddItem = () => {
     if (!Array) { return null }
@@ -38,7 +36,7 @@ export function useHooks() {
     setValue('')
   }
 
-  const handleAdd = (e: any) => {
+  const handleAdd = (e: KeyboardEvent<HTMLInputElement>) => {
     const keyCode = e.which || e.keyCode
     const ENTER = 13
 

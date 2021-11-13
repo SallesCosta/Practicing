@@ -16,7 +16,7 @@ export type CardProps = {
   onHandleChange: ChangeEventHandler<HTMLInputElement>,
   inputRef: RefObject<HTMLInputElement>,
   handleDelete: (id: string) => void
-  handleAdd: KeyboardEventHandler<HTMLInputElement> | undefined
+  handleAdd: KeyboardEventHandler
   bgColor2: string
   value?: string,
   border: string

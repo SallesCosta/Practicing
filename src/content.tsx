@@ -18,7 +18,7 @@ type ContentProps = {
   border: string,
   color: string,
   inputRef: RefObject<HTMLInputElement>,
-  handleAdd: KeyboardEventHandler<HTMLInputElement> | undefined,
+  handleAdd: KeyboardEventHandler,
 }
 
 export function Content({
@@ -68,7 +68,6 @@ export function Content({
                 border={border}
                 color={color}
                 inputRef={inputRef}
-
               />
             </TabPanel>
 

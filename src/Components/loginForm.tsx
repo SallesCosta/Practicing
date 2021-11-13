@@ -64,7 +64,7 @@ export const LoginForm = ({ color, bg }: LoginFormProps) => {
         <HStack mt='9'>
           <Checkbox
             // isDisabled
-            isChecked
+            // isChecked
             size='lg'
           />
           <Spacer />
