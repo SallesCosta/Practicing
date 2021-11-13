@@ -2,6 +2,7 @@
   "name": "lebowski",
   "version": "0.1.0",
   "private": true,
+  "description": "a template with some dependencies  ",
   "scripts": {
     "dev": "react-scripts start",
     "build": "react-scripts build",
@@ -13,7 +14,7 @@
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.17",
-    "@chakra-ui/react": "^1.6.12",
+    "@chakra-ui/react": "^1.7.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@testing-library/jest-dom": "^5.11.4",
