@@ -1,10 +1,10 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Flex } from '@chakra-ui/react'
+import { ChangeEventHandler, MouseEventHandler } from 'react'
 import { Sidebar } from './Components/sidebar/sidebar'
 import { LoginForm } from './Components/loginForm'
+import { Github } from './Components/github/github'
 import { Card } from './Components/card'
 import { Lista } from './hooks/hooks'
-import { ChangeEventHandler, MouseEventHandler } from 'react'
-import { Github } from './Components/github/github'
 
 type ContentProps = {
   value: string,

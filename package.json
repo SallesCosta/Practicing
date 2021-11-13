@@ -1,5 +1,5 @@
 {
-  "name": "lebowski",
+  "name": "practicing",
   "version": "0.1.0",
   "description": "a template with some dependencies ",
   "main": "App.tsx",
@@ -11,10 +11,6 @@
     "lint": "eslint src --ext ts,tsx --no-eslintrc --config .eslintrc-default.json",
     "lint:fix": "yarn lint --fix",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/SallesCosta/Lebowski.git"
   },
   "author": "NewCapital.in",
   "dependencies": {
