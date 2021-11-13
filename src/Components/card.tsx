@@ -4,7 +4,7 @@ import {
   Editable, EditableInput,
 } from '@chakra-ui/react'
 
-import { ChangeEventHandler, MouseEventHandler, RefObject } from 'react'
+import { ChangeEventHandler, KeyboardEventHandler, MouseEventHandler, RefObject, useEffect } from 'react'
 import { ChevronDownIcon, CopyIcon } from '@chakra-ui/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard' // npm i copy-to-clipboard     @types/react-copy-to-clipboard
 import { RiDeleteBinLine } from 'react-icons/ri'
@@ -12,16 +12,17 @@ import { GrFormAdd } from 'react-icons/gr'
 import { Lista } from '../hooks/hooks'
 
 export type CardProps = {
-  index: number,
-  Array: Lista[],
-  value?: string,
-  inputRef?: RefObject<HTMLInputElement>,
-  handleDelete: (id: string) => void
-  onHandleChange: ChangeEventHandler<HTMLInputElement>,
   AddItem: MouseEventHandler<HTMLButtonElement> & MouseEventHandler<Element>,
+  onHandleChange: ChangeEventHandler<HTMLInputElement>,
+  inputRef: RefObject<HTMLInputElement>,
+  handleDelete: (id: string) => void
+  handleAdd: KeyboardEventHandler<HTMLInputElement> | undefined
   bgColor2: string
+  value?: string,
   border: string
+  Array: Lista[],
   color: string
+  index: number,
 }
 
 export function Card({
@@ -33,10 +34,16 @@ export function Card({
   onHandleChange,
   bgColor2,
   border,
+  handleAdd,
 }: CardProps) {
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [inputRef])
+
   return (
     <Box
       p='18px'
+      initialFocusRef={inputRef}
     >
       <Box
         maxW='500px'
@@ -45,12 +52,12 @@ export function Card({
         borderWidth='1px'
         borderRadius='lg'
         overflow='hidden'
-        // bgColor='red'
         bgColor={bgColor2}
         color='gray.600'
         shadow='lg'
       >
         <Heading
+          borderColor={border}
           borderRadius='inherit'
           borderWidth='1px'
           fontSize='2xl'
@@ -68,20 +75,21 @@ export function Card({
         </Text>
         <Input
           onChange={onHandleChange}
+          onKeyUp={handleAdd}
+          bgColor={bgColor2}
+          value={value}
+          ref={inputRef}
+          isRequired
+          focusBorderColor='green.400'
+          placeholder='escreva aqui...'
           borderRadius='inherit'
           borderWidth='1px'
-          borderColor={border}
-          placeholder='escreva aqui'
-          focusBorderColor='green.400'
-          ref={inputRef}
           variant='flushed'
-          maxLength={34}
-          value={value}
-          bgColor={bgColor2}
-          // bgColor='white'
           color='gray.600'
-          isRequired
+          maxLength={34}
+          padding={5}
           size='lg'
+          _placeholder={{ color: 'gray.600' }}
         />
         <Divider mb='4' mt='4' maxW='500px' w='100%' />
         <Button

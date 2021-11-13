@@ -6,8 +6,8 @@ import { useHooks } from 'hooks/hooks'
 
 export function App() {
   const bgColor = useColorModeValue('gray.50', 'withealpha.50')
-  const bgColor2 = useColorModeValue('gray.50', '#f0f0f0')
-  const border = useColorModeValue('', 'gray.600')
+  const bgColor2 = useColorModeValue('gray.50', 'white')
+  const border = useColorModeValue('gray.50', 'gray.600')
 
   const color = useColorModeValue('gray.600', 'withealpha.400')
 
@@ -18,6 +18,8 @@ export function App() {
     value,
     Array,
     index,
+    inputRef,
+    handleAdd,
   } = useHooks()
   return (
     <Box>
@@ -33,6 +35,8 @@ export function App() {
         AddItem={AddItem}
         onHandleChange={handleChange}
         onHandleDelete={handleDelete}
+        inputRef={inputRef}
+        handleAdd={handleAdd}
       />
       <Footer color={color} />
     </Box>

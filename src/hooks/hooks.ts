@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from 'react'
+import { useState, useEffect, ChangeEvent, useRef } from 'react'
 import { v4 } from 'uuid' // yarn add uuid @types/uuid
 
 export type Lista = {
@@ -11,6 +11,7 @@ export function useHooks() {
   const [value, setValue] = useState('')
   const [Array, setArray] = useState<Lista[]>([])
   const [index, setIndex] = useState<number>(0)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     // console.log(Array)
@@ -24,15 +25,26 @@ export function useHooks() {
     return setArray(prevstate => prevstate.filter(item => (item.id !== id)))
   }
 
+
   const AddItem = () => {
     if (!Array) { return null }
+    inputRef.current?.focus()
     setArray(Array.concat({
       index: index,
       id: v4(),
       content: value,
     }))
     setIndex(index + 1)
+    setValue('')
   }
 
-  return { index, value, Array, handleChange, AddItem, handleDelete }
+  const handleAdd = (e: any) => {
+    const keyCode = e.which || e.keyCode
+    const ENTER = 13
+
+    if (keyCode === ENTER) {
+      AddItem()
+    }
+  }
+  return { index, value, Array, handleChange, AddItem, handleDelete, inputRef, handleAdd }
 }

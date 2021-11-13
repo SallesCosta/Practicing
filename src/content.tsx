@@ -1,5 +1,5 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Flex } from '@chakra-ui/react'
-import { ChangeEventHandler, MouseEventHandler } from 'react'
+import { ChangeEventHandler, KeyboardEventHandler, MouseEventHandler, RefObject } from 'react'
 import { Sidebar } from './Components/sidebar/sidebar'
 import { LoginForm } from './Components/loginForm'
 import { Github } from './Components/github/github'
@@ -17,6 +17,8 @@ type ContentProps = {
   bgColor2: string,
   border: string,
   color: string,
+  inputRef: RefObject<HTMLInputElement>,
+  handleAdd: KeyboardEventHandler<HTMLInputElement> | undefined,
 }
 
 export function Content({
@@ -30,6 +32,8 @@ export function Content({
   bgColor2,
   border,
   color,
+  inputRef,
+  handleAdd,
 }: ContentProps) {
   return (
     <Box
@@ -53,6 +57,7 @@ export function Content({
             <TabPanel><LoginForm /></TabPanel>
             <TabPanel>
               <Card
+                handleAdd={handleAdd}
                 value={value}
                 index={index}
                 Array={Array}
@@ -62,6 +67,7 @@ export function Content({
                 bgColor2={bgColor2}
                 border={border}
                 color={color}
+                inputRef={inputRef}
 
               />
             </TabPanel>
