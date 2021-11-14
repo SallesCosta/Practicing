@@ -4,14 +4,14 @@ import { Sidebar } from './Components/sidebar/sidebar'
 import { LoginForm } from './Components/loginForm'
 import { Github } from './Components/github/github'
 import { Card } from './Components/card'
-import { Lista } from './hooks/hooks'
+import { Lista } from './source/hooks'
 
 type ContentProps = {
   value: string,
   index: number,
   Array: Lista[],
   onHandleDelete: (id: string) => void,
-  onHandleChange: ChangeEventHandler<HTMLInputElement>,
+  handleChange: ChangeEventHandler<HTMLInputElement>,
   AddItem: MouseEventHandler<HTMLButtonElement> & MouseEventHandler<Element>,
   bgColor: string,
   bgColor2: string,
@@ -26,7 +26,7 @@ export function Content({
   Array,
   value,
   AddItem,
-  onHandleChange,
+  handleChange,
   onHandleDelete,
   bgColor,
   bgColor2,
@@ -53,7 +53,9 @@ export function Content({
             <Tab>Estatisticas</Tab>
           </TabList>
           <TabPanels>
-            <TabPanel><Github /></TabPanel>
+            <TabPanel>
+              <Github />
+            </TabPanel>
             <TabPanel><LoginForm /></TabPanel>
             <TabPanel>
               <Card
@@ -63,7 +65,7 @@ export function Content({
                 Array={Array}
                 AddItem={AddItem}
                 handleDelete={onHandleDelete}
-                onHandleChange={onHandleChange}
+                onHandleChange={handleChange}
                 bgColor2={bgColor2}
                 border={border}
                 color={color}

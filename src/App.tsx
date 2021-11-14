@@ -2,7 +2,7 @@ import { Box, useColorModeValue } from '@chakra-ui/react'
 import { Header } from './header'
 import { Footer } from './footer'
 import { Content } from './content'
-import { useHooks } from 'hooks/hooks'
+import { useHooks } from 'source/hooks'
 
 export function App() {
   const bgColor = useColorModeValue('gray.50', 'withealpha.50')
@@ -33,7 +33,7 @@ export function App() {
         Array={Array}
         value={value}
         AddItem={AddItem}
-        onHandleChange={handleChange}
+        handleChange={handleChange}
         onHandleDelete={handleDelete}
         inputRef={inputRef}
         handleAdd={handleAdd}

@@ -9,7 +9,7 @@ import { ChevronDownIcon, CopyIcon } from '@chakra-ui/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard' // npm i copy-to-clipboard     @types/react-copy-to-clipboard
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { GrFormAdd } from 'react-icons/gr'
-import { Lista } from '../hooks/hooks'
+import { Lista } from '../source/hooks'
 
 export type CardProps = {
   AddItem: MouseEventHandler<HTMLButtonElement> & MouseEventHandler<Element>,
@@ -36,14 +36,13 @@ export function Card({
   border,
   handleAdd,
 }: CardProps) {
-  useEffect(() => {
-    inputRef.current?.focus()
-  }, [inputRef])
+  // useEffect(() => {
+  //   inputRef.current?.focus()
+  // })
 
   return (
     <Box
       p='18px'
-      initialFocusRef={inputRef}
     >
       <Box
         maxW='500px'
@@ -51,9 +50,9 @@ export function Card({
         p='32px'
         borderWidth='1px'
         borderRadius='lg'
-        overflow='hidden'
         bgColor={bgColor2}
         color='gray.600'
+        overflow='hidden'
         shadow='lg'
       >
         <Heading
@@ -75,6 +74,7 @@ export function Card({
         </Text>
         <Input
           onChange={onHandleChange}
+          initialfocusref={inputRef}
           onKeyUp={handleAdd}
           bgColor={bgColor2}
           value={value}
@@ -119,19 +119,19 @@ export function Card({
                   <Text pl='5' w='377px'>{file.content}</Text>
                   <WrapItem>
                     <CopyToClipboard text={file.content}>
-                      <Circle
-                        size='24px'
-                        as='button'
-                        _hover={{
-                          color: 'red.400',
-                          borderRadius: 'full',
-                          bgColor: 'orange.200',
-                        }}
-                      >
-                        <Tooltip placement='left' label='Copy' openDelay={300}>
+                      <Tooltip placement='left' label='Copy' openDelay={300}>
+                        <Circle
+                          size='24px'
+                          as='button'
+                          _hover={{
+                            color: 'red.400',
+                            borderRadius: 'full',
+                            bgColor: 'orange.200',
+                          }}
+                        >
                           <Icon as={CopyIcon} />
-                        </Tooltip>
-                      </Circle>
+                        </Circle>
+                      </Tooltip>
                     </CopyToClipboard>
                   </WrapItem>
                   <WrapItem>

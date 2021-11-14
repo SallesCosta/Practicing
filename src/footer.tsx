@@ -14,6 +14,7 @@ type FooterProps = {
 
 export function Footer({ color }: FooterProps) {
   const { toggleColorMode } = useColorMode()
+  const tog = () => console.log('toggou')
   return (
     <Box
       w='100%'
@@ -27,10 +28,11 @@ export function Footer({ color }: FooterProps) {
       >
         <Text>Footer</Text>
         <FormControl display='flex' alignItems='center'>
-          <FormLabel htmlFor='email-alerts' mb='0'>
-            Dark Mode
+          <FormLabel mb='0'>
+            {/* {colorMode === 'light' ? 'Light Mode' : 'Dark Mode'} */}
+            {/* Dark Mode */}
           </FormLabel>
-          <Switch id='email-alerts' onChange={toggleColorMode} />
+          <Switch onChange={toggleColorMode} onClick={tog} />
         </FormControl>
       </HStack>
     </Box>
