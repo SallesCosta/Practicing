@@ -36,9 +36,9 @@ export function Card({
   border,
   handleAdd,
 }: CardProps) {
-  // useEffect(() => {
-  //   inputRef.current?.focus()
-  // })
+  useEffect(() => {
+    inputRef.current?.focus()
+  })
 
   return (
     <Box

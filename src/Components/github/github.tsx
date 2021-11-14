@@ -1,54 +1,69 @@
-import { Text, Input, Image } from '@chakra-ui/react'
-import { useEffect } from 'react'
-import { ChangeEventHandler, useState } from 'react'
-
-// export type GithubProps = {
-//   handleChange: ChangeEventHandler<HTMLInputElement>
-//   value: string,
-// }
-
-useEffect(() => {
-  fetch('https://api.github.com/users/mojombo')
-    .then(r => r.json).then(data => console.log(data))
-}, [])
+import { useState, useEffect } from 'react'
+import { Text, Input, Image, VStack, Box, Flex, FormControl, Button } from '@chakra-ui/react'
 
 export const Github = () => {
-  const [user, setUser] = useState('')
+  const [name, setName] = useState<string>('')
+  const [userName, setUsername] = useState('')
+  const [followers, setFollowers] = useState('')
+  const [following, setFollowing] = useState('')
+  const [repos, setRepos] = useState('')
+  const [avatar, setAvatar] = useState('')
+  const [userInput, setUserInput] = useState('')
+  // const [error, setError] = useState(null)
 
-  const url = 'https://api.github.com/users/mojombo'
-  // const img = "https://avatars.githubusercontent.com/u/1?v=4"
+  // useEffect(() => {
+  //   // fetch('https://api.github.com/users/exemple')
+  //   // fetch('https://api.github.com/users/fdaciuk')
+  //   fetch('https://api.github.com/users/sallesCosta')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setData(data)
+  //     })
+  // }, [])
 
-  // const user_url= `https://api.github.com/users/${user}`
-  // console.log(user_url)
-
-  // const followers = `https://api.github.com/${user}/followers`
-  // console.log(followers)
-
-  const handleSearch = () => {
-    console.log({ user })
+  const setData = ({
+    name,
+    login,
+    followers,
+    following,
+    public_repos,
+    avatar_url,
+  }: any) => {
+    setName(name),
+      setUsername(login),
+      setFollowers(followers),
+      setFollowing(following),
+      setRepos(public_repos),
+      setAvatar(avatar_url)
   }
-  // function handleSearch(e: any) {
-  //   const usuario = e.target.value
-  //   const keyCode = e.which || e.keyCode
-  //   const ENTER = 13
 
-  // if (keyCode === ENTER) {
-  //   fetch(url)
-  //     .then(r => setUser(r.
-  //       // user: r.name,
-  //       // photo: r.avatar_url,
-  //       // login: r.login,
-  //       // repos: r.public_repos,
-  //       // followers: r.followers,
-  //       // following: r.following,
-  //     ))
-  // }
+  const handleSearch = (e: any) => {
+    setUserInput(e.target.value)
+  }
 
+  const handleSubmit = () => {
+    fetch(`https://api.github.com/users/${userInput}`)
+      .then(res => res.json())
+      .then(data => {
+        setData(data)
+      })
+  }
   return (
-    <>
-      <Input placeholder='Basic usage' value='mojombo' onKeyUp={handleSearch} onChange={(e) => setUser(e.target.value)} />
-      {/* <Image src={img} /> */}
-      <Text>usuário escolhido {user}</Text>
-    </>
+    <Flex>
+      <VStack>
+        <FormControl>
+          <Input placeholder='Basic usage' onChange={handleSearch} />
+          <Button onClick={handleSubmit} colorScheme='blue' variant='outline'>Submit</Button>
+        </FormControl>
+        <Box>
+          <Image src={avatar} />
+          <Text>usuário escolhido {name}</Text>
+          <Text>Follower {followers}</Text>
+          <Text>Following {following}</Text>
+          <Text>Repositórios {repos}</Text>
+          <Text>Following {following}</Text>
+        </Box>
+      </VStack>
+    </Flex>
   )
 }
