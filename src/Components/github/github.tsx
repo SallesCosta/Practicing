@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react'
-import { Text, Input, Image, VStack, Box, Flex, FormControl, Button } from '@chakra-ui/react'
+import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement } from '@chakra-ui/react'
+import { useState, useRef, useEffect } from 'react'
 
 export const Github = () => {
   const [name, setName] = useState<string>('')
@@ -10,7 +10,11 @@ export const Github = () => {
   const [avatar, setAvatar] = useState('')
   const [userInput, setUserInput] = useState('')
   const [error, setError] = useState(null)
-  const inputRef = useRef()
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  // useEffect(() => {
+  //   inputRef.current?.focus()
+  // })
 
   // useEffect(() => {
   //   // fetch('https://api.github.com/users/exemple')
@@ -41,6 +45,8 @@ export const Github = () => {
 
     if (keyCode === ENTER) {
       handleSubmit()
+      setUserInput('')
+      inputRef.current?.focus()
     }
   }
 
@@ -55,15 +61,20 @@ export const Github = () => {
           setError(null)
         }
       })
-    // inputRef=''
+    setUserInput('')
+    inputRef.current?.focus()
   }
 
   return (
     <Flex>
       <VStack>
         <FormControl>
-          <Input placeholder='Basic usage' onChange={handleSearch} onKeyUp={handleConfirm} />
-          <Button onClick={handleSubmit} colorScheme='blue' variant='outline'>Submit</Button>
+          <InputGroup size='md'>
+            <Input borderColor='blue' value={userInput} ref={inputRef} placeholder='Basic usage' onChange={handleSearch} onKeyUp={handleConfirm} />
+            <InputRightElement width='4.5rem'>
+              <Button onClick={handleSubmit} colorScheme='blue' variant='outline'>Submit</Button>
+            </InputRightElement>
+          </InputGroup>
         </FormControl>
         <Box>
           <Image src={avatar} />
