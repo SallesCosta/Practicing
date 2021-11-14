@@ -1,4 +1,4 @@
-import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement } from '@chakra-ui/react'
+import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container } from '@chakra-ui/react'
 import { useState, useRef, useEffect } from 'react'
 
 export const Github = () => {
@@ -12,9 +12,9 @@ export const Github = () => {
   const [error, setError] = useState(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // useEffect(() => {
-  //   inputRef.current?.focus()
-  // })
+  useEffect(() => {
+    inputRef.current?.focus()
+  })
 
   // useEffect(() => {
   //   // fetch('https://api.github.com/users/exemple')
@@ -70,21 +70,24 @@ export const Github = () => {
       <VStack>
         <FormControl>
           <InputGroup size='md'>
-            <Input borderColor='blue' value={userInput} ref={inputRef} placeholder='Basic usage' onChange={handleSearch} onKeyUp={handleConfirm} />
+            <Input borderColor='blue' value={userInput} ref={inputRef} placeholder='an user...' onChange={handleSearch} onKeyUp={handleConfirm} />
             <InputRightElement width='4.5rem'>
               <Button onClick={handleSubmit} colorScheme='blue' variant='outline'>Submit</Button>
             </InputRightElement>
           </InputGroup>
         </FormControl>
-        <Box>
-          <Image src={avatar} />
-          <Text>usuário escolhido {name}</Text>
-          <Text>usuário escolhido {userName}</Text>
-          <Text>Follower {followers}</Text>
-          <Text>Following {following}</Text>
-          <Text>Repositórios {repos}</Text>
-          <Text>Following {following}</Text>
-        </Box>
+        {error
+          ? <Heading as='h2' size='xl'>{error} Noooo... something wrong!! better call Batman</Heading>
+          : <Container>
+            <Image src={avatar} />
+            <Text>usuário escolhido {name}</Text>
+            <Text>usuário escolhido {userName}</Text>
+            <Text>Follower {followers}</Text>
+            <Text>Following {following}</Text>
+            <Text>Repositórios {repos}</Text>
+            <Text>Following {following}</Text>
+          </Container>
+        }
       </VStack>
     </Flex>
   )
