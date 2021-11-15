@@ -1,4 +1,4 @@
-import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container } from '@chakra-ui/react'
+import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container, ListItem, List, Link } from '@chakra-ui/react'
 import { useState, useRef, useEffect } from 'react'
 
 export const Github = () => {
@@ -6,8 +6,12 @@ export const Github = () => {
   const [userName, setUsername] = useState('')
   const [followers, setFollowers] = useState('')
   const [following, setFollowing] = useState('')
-  const [repos, setRepos] = useState('')
   const [avatar, setAvatar] = useState('')
+  const [reposURL, setReposURL] = useState([])
+  const [repos, setRepos] = useState([])
+  const [reposName, setReposName] = useState([])
+  const [reposLink, setReposLink] = useState([])
+  const [starred, setStarred] = useState([])
   const [userInput, setUserInput] = useState('')
   const [error, setError] = useState(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -31,9 +35,20 @@ export const Github = () => {
     login,
     followers,
     following,
-    // eslint-disable-next-line camelcase
-    public_repos, avatar_url,
-  }: any) => { setName(name), setUsername(login), setFollowers(followers), setFollowing(following), setRepos(public_repos), setAvatar(avatar_url) }
+    avatar_url,
+    public_repos,
+    starred,
+    repository_url,
+  }: any) => {
+    setName(name),
+      setUsername(login),
+      setFollowers(followers),
+      setFollowing(following),
+      setReposURL(repository_url),
+      setRepos(public_repos),
+      setAvatar(avatar_url),
+      setStarred(starred)
+  }
 
   const handleSearch = (e: any) => {
     setUserInput(e.target.value)
@@ -65,6 +80,20 @@ export const Github = () => {
     inputRef.current?.focus()
   }
 
+  // function getGitHubApiUrl(username: any, type: any) {
+  //   const internalUser = username ? `/${username}` : ''
+  //   const internalType = type ? `/${type}` : ''
+  //   return `https://api.github.com/users${internalUser}${internalType}`
+  // }
+
+  const getRepoList = () => {
+    fetch(`https://api.github.com/users/${userInput}repos`)
+      .then(res => res.json())
+      .then(result => {
+        setRepos(result)
+      })
+  }
+
   return (
     <Flex>
       <VStack>
@@ -78,16 +107,28 @@ export const Github = () => {
         </FormControl>
         {error
           ? <Heading as='h2' size='xl'>{error} Noooo... something wrong!! better call Batman</Heading>
-          : <Container>
-            <Image src={avatar} />
-            <Text>usuário escolhido {name}</Text>
-            <Text>usuário escolhido {userName}</Text>
-            <Text>Follower {followers}</Text>
-            <Text>Following {following}</Text>
-            <Text>Repositórios {repos}</Text>
-            <Text>Following {following}</Text>
-          </Container>
-        }
+          : <>
+            <Container>
+              <Image src={avatar} />
+              <Text>usuário escolhido {name}</Text>
+              <Text>usuário escolhido {userName}</Text>
+              <Text>Follower {followers}</Text>
+              <Text>Following {following}</Text>
+              <Text>Repositórios {repos}</Text>
+              <Text>Following {following}</Text>
+              <Text>Starred {starred}</Text>
+            </Container>
+            <Button onClick={getRepoList} colorScheme='blue' variant='outline'>Repositórios</Button>
+            {/* <Button onClick={() => getList('starred')} colorScheme='blue' variant='outline'>Starred</Button> */}
+            {/* <List>
+              {repos.map((r, index) => (
+                <ListItem key={index}>
+                  <Link target='_blank'>{r}</Link>
+                </ListItem>
+              ))
+              }
+            </List> */}
+          </>}
       </VStack>
     </Flex>
   )
