@@ -1,5 +1,6 @@
 import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container, ListItem, List, Link } from '@chakra-ui/react'
 import { useState, useRef, useEffect } from 'react'
+import CopyToClipboard from 'react-copy-to-clipboard'
 
 export const Github = () => {
   const [name, setName] = useState<string>('')
@@ -7,28 +8,23 @@ export const Github = () => {
   const [followers, setFollowers] = useState('')
   const [following, setFollowing] = useState('')
   const [avatar, setAvatar] = useState('')
-  const [reposURL, setReposURL] = useState([])
   const [repos, setRepos] = useState([])
-  const [reposName, setReposName] = useState([])
-  const [reposLink, setReposLink] = useState([])
   const [starred, setStarred] = useState([])
   const [userInput, setUserInput] = useState('')
   const [error, setError] = useState(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  // const [reposURL, setReposURL] = useState([])
+  // const [reposLink, setReposLink] = useState([])
+  // const [reposName, setReposName] = useState([])
 
   useEffect(() => {
     inputRef.current?.focus()
   })
 
-  // useEffect(() => {
-  //   // fetch('https://api.github.com/users/exemple')
-  //   // fetch('https://api.github.com/users/fdaciuk')
-  //   fetch('https://api.github.com/users/sallesCosta')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setData(data)
-  //     })
-  // }, [])
+  useEffect(() => {
+    console.log(repos)
+    console.log(starred)
+  }, [repos, starred])
 
   const setData = ({
     name,
@@ -36,19 +32,22 @@ export const Github = () => {
     followers,
     following,
     avatar_url,
-    public_repos,
-    starred,
-    repository_url,
   }: any) => {
     setName(name),
       setUsername(login),
       setFollowers(followers),
       setFollowing(following),
-      setReposURL(repository_url),
-      setRepos(public_repos),
-      setAvatar(avatar_url),
+      setAvatar(avatar_url)
+  }
+
+  const setTry = ({
+    public_repos,
+    starred,
+  }: any) => {
+    setRepos(public_repos),
       setStarred(starred)
   }
+
 
   const handleSearch = (e: any) => {
     setUserInput(e.target.value)
@@ -65,6 +64,15 @@ export const Github = () => {
     }
   }
 
+  const getRepoList = (user: string) => {
+    fetch(`https://api.github.com/users/${user}/repos`)
+      // fetch('https://api.github.com/users/sallesCosta/repos')
+      .then(res => res.json())
+      .then(result => {
+        setTry(result)
+      })
+  }
+
   const handleSubmit = () => {
     fetch(`https://api.github.com/users/${userInput}`)
       .then(res => res.json())
@@ -78,20 +86,10 @@ export const Github = () => {
       })
     setUserInput('')
     inputRef.current?.focus()
-  }
-
-  // function getGitHubApiUrl(username: any, type: any) {
-  //   const internalUser = username ? `/${username}` : ''
-  //   const internalType = type ? `/${type}` : ''
-  //   return `https://api.github.com/users${internalUser}${internalType}`
-  // }
-
-  const getRepoList = () => {
-    fetch(`https://api.github.com/users/${userInput}repos`)
-      .then(res => res.json())
-      .then(result => {
-        setRepos(result)
-      })
+    getRepoList(userInput)
+    console.log('user input: ', userInput)
+    console.log('repos: ', repos)
+    console.log('starred: ', starred)
   }
 
   return (
@@ -114,11 +112,10 @@ export const Github = () => {
               <Text>usuário escolhido {userName}</Text>
               <Text>Follower {followers}</Text>
               <Text>Following {following}</Text>
-              <Text>Repositórios {repos}</Text>
-              <Text>Following {following}</Text>
-              <Text>Starred {starred}</Text>
+              {/* <Text>Repositórios {repos}</Text> */}
+              {/* <Text>Starred {starred}</Text> */}
             </Container>
-            <Button onClick={getRepoList} colorScheme='blue' variant='outline'>Repositórios</Button>
+            {/* <Button onClick={getRepoList} colorScheme='blue' variant='outline'>Repositórios</Button> */}
             {/* <Button onClick={() => getList('starred')} colorScheme='blue' variant='outline'>Starred</Button> */}
             {/* <List>
               {repos.map((r, index) => (

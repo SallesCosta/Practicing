@@ -1,4 +1,5 @@
 import { Box, Center, HStack, Text } from '@chakra-ui/react'
+import CopyToClipboard from 'react-copy-to-clipboard'
 
 type HeaderProps = {
   color: string,
@@ -13,7 +14,9 @@ export function Header({ color }: HeaderProps) {
         color={color}
       >
         <HStack>
-          <Center><Text>Header</Text></Center>
+          <CopyToClipboard text='sallesCosta'>
+            <Center><Text>Header</Text></Center>
+          </CopyToClipboard>
         </HStack>
       </Box>
     </>
