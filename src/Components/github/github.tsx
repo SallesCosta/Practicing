@@ -1,3 +1,6 @@
+// TODO
+// SETTIMEOUT PARA SIMULAR UM ATRAZO DO GETCH DE 2 SEGUNDOS... AP(USAR SKELETON) AÓS 1 SEGUNDO.. APARECE A FOTO.. AÓÓS O SEGUNDO SEGUNDO APARECEDRA AS OUTRAS INFORMÇOES OU VICE E VERSA.. FOTO POR ULTIMO
+
 import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container, ListItem, List, Link, Stack } from '@chakra-ui/react'
 import { useState, useRef, useEffect } from 'react'
 import { UserContent, Error } from './userContent'
@@ -12,8 +15,8 @@ export const Github = () => {
   const [starred, setStarred] = useState([])
   const [userInput, setUserInput] = useState('')
   const [userInput2, setUserInput2] = useState('')
-  const [error, setError] = useState(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -95,7 +98,7 @@ export const Github = () => {
             </InputRightElement>
           </InputGroup>
         </FormControl>
-        {/* {!!repos.length && <UserContent
+        {!!repos.length && <UserContent
           avatar={avatar}
           name={name}
           userName={userName}
@@ -105,9 +108,11 @@ export const Github = () => {
           getStarredList={getStarredList}
         />
         }
-        <Error /> */}
-        {/* {!!error && <Error msg={error} />} */}
 
+        {!repos.length && <Error msg={error} />}
+
+        {/* {!!error && <Error msg={error} />} */}
+        {/*
         {error
           ? <Error msg={error} />
           : <UserContent
@@ -119,7 +124,7 @@ export const Github = () => {
             getRepoList={getRepoList}
             getStarredList={getStarredList}
           />
-        }
+        } */}
       </VStack>
     </Flex>
   )
