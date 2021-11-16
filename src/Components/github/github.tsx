@@ -1,6 +1,5 @@
 import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container, ListItem, List, Link } from '@chakra-ui/react'
 import { useState, useRef, useEffect } from 'react'
-import CopyToClipboard from 'react-copy-to-clipboard'
 
 export const Github = () => {
   const [name, setName] = useState<string>('')
@@ -11,20 +10,13 @@ export const Github = () => {
   const [repos, setRepos] = useState([])
   const [starred, setStarred] = useState([])
   const [userInput, setUserInput] = useState('')
+  const [userInput2, setUserInput2] = useState('')
   const [error, setError] = useState(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  // const [reposURL, setReposURL] = useState([])
-  // const [reposLink, setReposLink] = useState([])
-  // const [reposName, setReposName] = useState([])
 
   useEffect(() => {
     inputRef.current?.focus()
   })
-
-  useEffect(() => {
-    console.log(repos)
-    console.log(starred)
-  }, [repos, starred])
 
   const setData = ({
     name,
@@ -40,17 +32,9 @@ export const Github = () => {
       setAvatar(avatar_url)
   }
 
-  const setTry = ({
-    public_repos,
-    starred,
-  }: any) => {
-    setRepos(public_repos),
-      setStarred(starred)
-  }
-
-
   const handleSearch = (e: any) => {
     setUserInput(e.target.value)
+    setUserInput2(e.target.value)
   }
 
   const handleConfirm = (e: any) => {
@@ -64,13 +48,22 @@ export const Github = () => {
     }
   }
 
-  const getRepoList = (user: string) => {
-    fetch(`https://api.github.com/users/${user}/repos`)
-      // fetch('https://api.github.com/users/sallesCosta/repos')
+  const getRepoList = () => {
+    fetch(`https://api.github.com/users/${userInput2}/repos`)
       .then(res => res.json())
       .then(result => {
-        setTry(result)
+        setRepos(Object.values(result))
       })
+    console.log('Lista de Repositórios: ', repos)
+  }
+
+  const getStarredList = () => {
+    fetch(`https://api.github.com/users/${userInput2}/starred`)
+      .then(res => res.json())
+      .then(result => {
+        setStarred(Object.values(result))
+      })
+    console.log('Lista de Starreds: ', starred)
   }
 
   const handleSubmit = () => {
@@ -86,10 +79,8 @@ export const Github = () => {
       })
     setUserInput('')
     inputRef.current?.focus()
-    getRepoList(userInput)
-    console.log('user input: ', userInput)
-    console.log('repos: ', repos)
-    console.log('starred: ', starred)
+    getRepoList()
+    getStarredList()
   }
 
   return (
@@ -115,7 +106,8 @@ export const Github = () => {
               {/* <Text>Repositórios {repos}</Text> */}
               {/* <Text>Starred {starred}</Text> */}
             </Container>
-            {/* <Button onClick={getRepoList} colorScheme='blue' variant='outline'>Repositórios</Button> */}
+            <Button onClick={getRepoList} colorScheme='blue' variant='outline'>Repositórios</Button>
+            <Button onClick={getStarredList} colorScheme='blue' variant='outline'>Starreds</Button>
             {/* <Button onClick={() => getList('starred')} colorScheme='blue' variant='outline'>Starred</Button> */}
             {/* <List>
               {repos.map((r, index) => (
