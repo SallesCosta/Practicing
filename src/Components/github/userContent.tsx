@@ -24,10 +24,10 @@ export const UserContent = ({ avatar, name, userName, followers, following, getR
   )
 }
 
-export const Error = (error:any) => {
+export const Error = (msg:any) => {
   return (
     <Container>
-      <Heading as='h2' size='xl'>{error}</Heading>
+      <Heading as='h2' size='xl'>{msg}</Heading>
       <Heading as='h2' size='lg'>Noooo... something wrong!! better call Batman</Heading>
       <Image
         w='100%'

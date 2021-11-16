@@ -12,7 +12,7 @@ export const Github = () => {
   const [starred, setStarred] = useState([])
   const [userInput, setUserInput] = useState('')
   const [userInput2, setUserInput2] = useState('')
-  const [error, setError] = useState(false)
+  const [error, setError] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export const Github = () => {
           setError(data.message)
         } else {
           setData(data)
-          setError(false)
+          setError('')
         }
       })
     setUserInput('')
@@ -95,9 +95,20 @@ export const Github = () => {
             </InputRightElement>
           </InputGroup>
         </FormControl>
-        {repos.length === 0 ? <Text>vazio</Text> : <Text>cheio</Text>}
+        {!!repos.length && <UserContent
+          avatar={avatar}
+          name={name}
+          userName={userName}
+          followers={followers}
+          following={following}
+          getRepoList={getRepoList}
+          getStarredList={getStarredList}
+        />
+        }
+        {/* {!!error && <Error msg={error} />} */}
 
-        {error
+
+        {/* {error
           ? <Error />
           : <UserContent
               avatar={avatar}
@@ -108,7 +119,7 @@ export const Github = () => {
               getRepoList={getRepoList}
               getStarredList={getStarredList}
             />
-        }
+        } */}
       </VStack>
     </Flex>
   )
