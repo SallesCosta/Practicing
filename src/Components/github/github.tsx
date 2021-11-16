@@ -1,5 +1,6 @@
-import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container, ListItem, List, Link } from '@chakra-ui/react'
+import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container, ListItem, List, Link, Stack } from '@chakra-ui/react'
 import { useState, useRef, useEffect } from 'react'
+import { UserContent, Error } from './userContent'
 
 export const Github = () => {
   const [name, setName] = useState<string>('')
@@ -11,7 +12,7 @@ export const Github = () => {
   const [starred, setStarred] = useState([])
   const [userInput, setUserInput] = useState('')
   const [userInput2, setUserInput2] = useState('')
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -74,7 +75,7 @@ export const Github = () => {
           setError(data.message)
         } else {
           setData(data)
-          setError(null)
+          setError(false)
         }
       })
     setUserInput('')
@@ -85,44 +86,29 @@ export const Github = () => {
 
   return (
     <Flex>
-      <VStack>
+      <VStack w='250px'>
         <FormControl>
-          <InputGroup size='md'>
+          <InputGroup size='md' w='100%'>
             <Input borderColor='blue' value={userInput} ref={inputRef} placeholder='an user...' onChange={handleSearch} onKeyUp={handleConfirm} />
             <InputRightElement width='4.5rem'>
               <Button onClick={handleSubmit} colorScheme='blue' variant='outline'>Submit</Button>
             </InputRightElement>
           </InputGroup>
         </FormControl>
+        {repos.length === 0 ? <Text>vazio</Text> : <Text>cheio</Text>}
+
         {error
-          ? <Box>
-            <Heading as='h2' size='xl'>{error}</Heading>
-            <Heading as='h2' size='lg'>Noooo... something wrong!! better call Batman</Heading>
-            <Image src='https://img.gta5-mods.com/q95/images/bat-signal-moons/35e9c5-Grand%20Theft%20Auto%20V%201_10_2017%2012_10_41%20AM.png'
-              alt='Bat Signal' />
-          </Box>
-          : <>
-            <Container>
-              <Image src={avatar} />
-              <Text>usuário escolhido {name}</Text>
-              <Text>usuário escolhido {userName}</Text>
-              <Text>Follower {followers}</Text>
-              <Text>Following {following}</Text>
-              {/* <Text>Repositórios {repos}</Text> */}
-              {/* <Text>Starred {starred}</Text> */}
-            </Container>
-            <Button onClick={getRepoList} colorScheme='blue' variant='outline'>Repositórios</Button>
-            <Button onClick={getStarredList} colorScheme='blue' variant='outline'>Starreds</Button>
-            {/* <Button onClick={() => getList('starred')} colorScheme='blue' variant='outline'>Starred</Button> */}
-            {/* <List>
-              {repos.map((r, index) => (
-                <ListItem key={index}>
-                  <Link target='_blank'>{r}</Link>
-                </ListItem>
-              ))
-              }
-            </List> */}
-          </>}
+          ? <Error />
+          : <UserContent
+              avatar={avatar}
+              name={name}
+              userName={userName}
+              followers={followers}
+              following={following}
+              getRepoList={getRepoList}
+              getStarredList={getStarredList}
+            />
+        }
       </VStack>
     </Flex>
   )
