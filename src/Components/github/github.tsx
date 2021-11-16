@@ -12,7 +12,7 @@ export const Github = () => {
   const [starred, setStarred] = useState([])
   const [userInput, setUserInput] = useState('')
   const [userInput2, setUserInput2] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export const Github = () => {
           setError(data.message)
         } else {
           setData(data)
-          setError('')
+          setError(null)
         }
       })
     setUserInput('')
@@ -95,7 +95,7 @@ export const Github = () => {
             </InputRightElement>
           </InputGroup>
         </FormControl>
-        {!!repos.length && <UserContent
+        {/* {!!repos.length && <UserContent
           avatar={avatar}
           name={name}
           userName={userName}
@@ -105,21 +105,21 @@ export const Github = () => {
           getStarredList={getStarredList}
         />
         }
+        <Error /> */}
         {/* {!!error && <Error msg={error} />} */}
 
-
-        {/* {error
-          ? <Error />
+        {error
+          ? <Error msg={error} />
           : <UserContent
-              avatar={avatar}
-              name={name}
-              userName={userName}
-              followers={followers}
-              following={following}
-              getRepoList={getRepoList}
-              getStarredList={getStarredList}
-            />
-        } */}
+            avatar={avatar}
+            name={name}
+            userName={userName}
+            followers={followers}
+            following={following}
+            getRepoList={getRepoList}
+            getStarredList={getStarredList}
+          />
+        }
       </VStack>
     </Flex>
   )
