@@ -95,7 +95,12 @@ export const Github = () => {
           </InputGroup>
         </FormControl>
         {error
-          ? <Heading as='h2' size='xl'>{error} Noooo... something wrong!! better call Batman</Heading>
+          ? <Box>
+            <Heading as='h2' size='xl'>{error}</Heading>
+            <Heading as='h2' size='lg'>Noooo... something wrong!! better call Batman</Heading>
+            <Image src='https://img.gta5-mods.com/q95/images/bat-signal-moons/35e9c5-Grand%20Theft%20Auto%20V%201_10_2017%2012_10_41%20AM.png'
+              alt='Bat Signal' />
+          </Box>
           : <>
             <Container>
               <Image src={avatar} />
