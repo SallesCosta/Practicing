@@ -1,33 +1,104 @@
-export type GithubProps = {
-  handleChange: ChangeEventHandler<HTMLInputElement>
-  value: string,
-}
+// // TODO
+// // SETTIMEOUT PARA SIMULAR UM ATRAZO DO GETCH DE 2 SEGUNDOS... AP(USAR SKELETON) AÓS 1 SEGUNDO.. APARECE A FOTO.. AÓÓS O SEGUNDO SEGUNDO APARECEDRA AS OUTRAS INFORMÇOES OU VICE E VERSA.. FOTO POR ULTIMO
 
-// const url = 'https://api.github.com/users/mojombo'
-  // const img = "https://avatars.githubusercontent.com/u/1?v=4"
+// import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container, ListItem, List, Link, Stack } from '@chakra-ui/react'
+// import { useState, useRef, useEffect } from 'react'
+// import { UserContent, Error } from './userContent'
 
-  // const user_url= `https://api.github.com/users/${user}`
-  // console.log(user_url)
+// export const Github = () => {
+//   const [name, setName] = useState<string>('')
+//   const [userName, setUsername] = useState('')
+//   const [followers, setFollowers] = useState('')
+//   const [following, setFollowing] = useState('')
+//   const [avatar, setAvatar] = useState('')
+//   const [repos, setRepos] = useState([])
+//   const [starred, setStarred] = useState([])
+//   const [userInput, setUserInput] = useState('')
+//   const [userInput2, setUserInput2] = useState('')
+//   const inputRef = useRef<HTMLInputElement>(null)
 
-  // const followers = `https://api.github.com/${user}/followers`
-  // console.log(followers)
+//   useEffect(() => {
+//     inputRef.current?.focus()
+//   })
 
-  // const handleSearch = () => {
-  //   console.log({ avatar })
-  // }
-  // function handleSearch(e: any) {
-  //   const usuario = e.target.value
-  //   const keyCode = e.which || e.keyCode
-  //   const ENTER = 13
+//   const setData = ({
+//     name,
+//     login,
+//     followers,
+//     following,
+//     avatar_url,
+//   }: any) => {
+//     setName(name),
+//       setUsername(login),
+//       setFollowers(followers),
+//       setFollowing(following),
+//       setAvatar(avatar_url)
+//   }
+//   //
 
-  // if (keyCode === ENTER) {
-  //   fetch(url)
-  //     .then(r => setUser(r.
-  //       // user: r.name,
-  //       // photo: r.avatar_url,
-  //       // login: r.login,
-  //       // repos: r.public_repos,
-  //       // followers: r.followers,
-  //       // following: r.following,
-  //     ))
-  // }
+//   const handleSearch = (e: any) => {
+//     setUserInput(e.target.value)
+//     setUserInput2(e.target.value)
+//   }
+
+//   const handleConfirm = (e: any) => {
+//     const keyCode = e.which || e.keyCode
+//     const ENTER = 13
+
+//     if (keyCode === ENTER) {
+//       handleSubmit()
+//       setUserInput('')
+//       inputRef.current?.focus()
+//     }
+//   }
+
+//   const getRepoList = () => {
+//     fetch(`https://api.github.com/users/${userInput2}/repos`)
+//       .then(res => res.json())
+//       .then(result => {
+//         setRepos(Object.values(result))
+//       })
+//     console.log('Lista de Repositórios: ', repos)
+//   }
+
+//   const getStarredList = () => {
+//     fetch(`https://api.github.com/users/${userInput2}/starred`)
+//       .then(res => res.json())
+//       .then(result => {
+//         setStarred(Object.values(result))
+//       })
+//     console.log('Lista de Starreds: ', starred)
+//   }
+
+
+//   const [error, setError] = useState(null)
+
+//   const handleSubmit = () => {
+//     fetch(`https://api.github.com/users/${userInput}`)
+//       .then(res => res.json())
+//       .then(data => {
+//         if (data.message) {
+//           setError(data.message)
+//         } else {
+//           setData(data)
+//           setError(null)
+//         }
+//       })
+//     setUserInput('')
+//     inputRef.current?.focus()
+//     getRepoList()
+//     getStarredList()
+//   }
+
+//   return (
+//     <Flex>
+//       <VStack>
+//         {error
+//           ? <Error msg={error} />
+//           : <UserContent {...umMontedeProps} />
+//         }
+//       </VStack>
+//     </Flex>
+//   )
+// }
+

@@ -1,4 +1,4 @@
-import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container, ListItem, List, Link, Stack } from '@chakra-ui/react'
+import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container, ListItem, List, Link, Stack, HStack } from '@chakra-ui/react'
 
 type UserContentProps = {
   avatar: any,
@@ -30,10 +30,42 @@ export const Error = ({ msg }: any) => {
       <Heading as='h2' size='xl'>{msg}</Heading>
       <Heading as='h2' size='lg'>Noooo... something wrong!! better call Batman</Heading>
       <Image
-        w='100%'
+        w='400px'
         alt='Bat Signal'
         src='https://img.gta5-mods.com/q95/images/bat-signal-moons/35e9c5-Grand%20Theft%20Auto%20V%201_10_2017%2012_10_41%20AM.png'
       />
     </Container>
+  )
+}
+
+type MyInputProps = {
+  userInput: string,
+  inputRef: any,
+  handleSearch: any,
+  handleConfirm: any,
+  handleSubmit: any,
+}
+
+export const MyInput = ({ userInput, inputRef, handleSearch, handleConfirm, handleSubmit }: MyInputProps) => {
+  return (
+    <HStack>
+      <VStack w='400px'>
+        <FormControl>
+          <InputGroup size='md' w='100%'>
+            <Input
+              borderColor='blue'
+              value={userInput}
+              inputRef={inputRef}
+              placeholder='an user...'
+              onChange={handleSearch}
+              onKeyUp={handleConfirm}
+            />
+            <InputRightElement width='4.5rem'>
+              <Button onClick={handleSubmit} colorScheme='blue' variant='outline'>Submit</Button>
+            </InputRightElement>
+          </InputGroup>
+        </FormControl>
+      </VStack>
+    </HStack>
   )
 }
