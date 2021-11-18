@@ -104,59 +104,67 @@ export function Card({
         {Array.length === 0
           ? <Text fontSize='xl' align='center' mb='4' mt='4'>Array vazio</Text>
           : <Text fontSize='xl' align='center' mb='4' mt='4'>Lista dentro do Array:</Text>}
-        <List spacing={8}>
-          {Array !== undefined && Array.map(file => (
-            <ListItem key={(file.id)} w='100%' h='12px'>
-              <Flex
-                bgColor={
-                  file.index % 2 === 0
-                    ? 'green.200'
-                    : 'whiteAlpha.100'
-                }
-                size='md' borderRadius='full'
-              >
-                <HStack>
-                  <Text pl='5' w='377px'>{file.content}</Text>
-                  <WrapItem>
-                    <CopyToClipboard text={file.content}>
-                      <Tooltip placement='left' label='Copy' openDelay={300}>
+        <Box
+          maxH='350px'
+          h='350px'
+          overflowY='scroll'
+        >
+          <List
+            spacing={8}
+          >
+            {Array !== undefined && Array.map(file => (
+              <ListItem key={(file.id)} w='100%' h='12px'>
+                <Flex
+                  bgColor={
+                    file.index % 2 === 0
+                      ? 'green.200'
+                      : 'whiteAlpha.100'
+                  }
+                  size='md' borderRadius='full'
+                >
+                  <HStack>
+                    <Text pl='5' w='377px'>{file.content}</Text>
+                    <WrapItem>
+                      <CopyToClipboard text={file.content}>
+                        <Tooltip placement='left' label='Copy' openDelay={300}>
+                          <Circle
+                            size='24px'
+                            as='button'
+                            _hover={{
+                              color: 'red.400',
+                              borderRadius: 'full',
+                              bgColor: 'orange.200',
+                            }}
+                          >
+                            <Icon as={CopyIcon} />
+                          </Circle>
+                        </Tooltip>
+                      </CopyToClipboard>
+                    </WrapItem>
+                    <WrapItem>
+                      <Tooltip placement='right' label='Delete' openDelay={300}>
                         <Circle
                           size='24px'
                           as='button'
+                          onClick={() => handleDelete(file.id)}
                           _hover={{
                             color: 'red.400',
                             borderRadius: 'full',
                             bgColor: 'orange.200',
                           }}
                         >
-                          <Icon as={CopyIcon} />
+                          <Icon
+                            as={RiDeleteBinLine}
+                          />
                         </Circle>
                       </Tooltip>
-                    </CopyToClipboard>
-                  </WrapItem>
-                  <WrapItem>
-                    <Tooltip placement='right' label='Delete' openDelay={300}>
-                      <Circle
-                        size='24px'
-                        as='button'
-                        onClick={() => handleDelete(file.id)}
-                        _hover={{
-                          color: 'red.400',
-                          borderRadius: 'full',
-                          bgColor: 'orange.200',
-                        }}
-                      >
-                        <Icon
-                          as={RiDeleteBinLine}
-                        />
-                      </Circle>
-                    </Tooltip>
-                  </WrapItem>
-                </HStack>
-              </Flex>
-            </ListItem>
-          ))}
-        </List>
+                    </WrapItem>
+                  </HStack>
+                </Flex>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
       </Box>
       <Divider mb='4' mt='4' maxW='500px' w='500px' />
       <Editable

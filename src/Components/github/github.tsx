@@ -1,9 +1,9 @@
 // TODO
 // SETTIMEOUT PARA SIMULAR UM ATRAZO DO GETCH DE 2 SEGUNDOS... AP(USAR SKELETON) AÓS 1 SEGUNDO.. APARECE A FOTO.. AÓÓS O SEGUNDO SEGUNDO APARECEDRA AS OUTRAS INFORMÇOES OU VICE E VERSA.. FOTO POR ULTIMO
 
-import { Text, Input, Image, VStack, Box, Flex, FormControl, Button, InputGroup, InputRightElement, Heading, Container, ListItem, List, Link, Stack, HStack } from '@chakra-ui/react'
+import { Box, Flex, HStack, List, ListItem, VStack } from '@chakra-ui/react'
 import { useState, useRef, useEffect } from 'react'
-import { UserContent, Error, MyInput } from './userContent'
+import { UserContent, Error, MyInput } from './subComponents'
 
 export const Github = () => {
   const [initial, setInitial] = useState(false)
@@ -22,8 +22,6 @@ export const Github = () => {
   useEffect(() => {
     inputRef.current?.focus()
   })
-
-
 
   const setData = ({
     name,
@@ -61,7 +59,6 @@ export const Github = () => {
       .then(result => {
         setRepos(Object.values(result))
       })
-    console.log('Lista de Repositórios: ', repos)
     setRepos([])
   }
 
@@ -71,7 +68,6 @@ export const Github = () => {
       .then(result => {
         setStarred(Object.values(result))
       })
-    console.log('Lista de Starreds: ', starred)
     setStarred([])
   }
 
@@ -95,17 +91,18 @@ export const Github = () => {
 
   if (initial) {
     return (
-      <>
-        <MyInput
-          inputRef={inputRef}
-          userInput={userInput}
-          handleSearch={handleSearch}
-          handleConfirm={handleConfirm}
-          handleSubmit={handleSubmit}
-        />
-        {error
-          ? <Error msg={error} />
-          : <UserContent
+      <HStack spacing='6'>
+        <VStack>
+          <MyInput
+            inputRef={inputRef}
+            userInput={userInput}
+            handleSearch={handleSearch}
+            handleConfirm={handleConfirm}
+            handleSubmit={handleSubmit}
+          />
+          {error
+            ? <Error msg={error} />
+            : <UserContent
               avatar={avatar}
               name={name}
               userName={userName}
@@ -113,48 +110,57 @@ export const Github = () => {
               following={following}
               getRepoList={getRepoList}
               getStarredList={getStarredList}
-          />
-        }
-      </>
+            />
+          }
+        </VStack>
+        <Box
+          w='250px'
+          maxH='350px'
+          overflow='scroll'
+          // border='1px'
+          borderColor='gray.200'
+        >
+          <List>
+            {repos.map((repo, index) => (
+              <ListItem key={index}>{repo}</ListItem>
+            ))}
+          </List>
+        </Box>
+        {/* <Box
+          w='300px'
+          h='300px'
+        >
+          <List>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+            <ListItem >starred</ListItem>
+          </List>
+        </Box> */}
+      </HStack>
     )
   }
 
   return (
-    <MyInput
-      inputRef={inputRef}
-      userInput={userInput}
-      handleSearch={handleSearch}
-      handleConfirm={handleConfirm}
-      handleSubmit={handleSubmit}
-    />
+    <Flex>
+      <MyInput
+        inputRef={inputRef}
+        userInput={userInput}
+        handleSearch={handleSearch}
+        handleConfirm={handleConfirm}
+        handleSubmit={handleSubmit}
+      />
+    </Flex>
   )
 }
-
-// <HStack>
-//         <VStack w='400px'>
-//           <FormControl>
-//             <InputGroup size='md' w='100%'>
-//               <Input borderColor='blue' value={userInput} ref={inputRef} placeholder='an user...' onChange={handleSearch} onKeyUp={handleConfirm} />
-//               <InputRightElement width='4.5rem'>
-//                 <Button onClick={handleSubmit} colorScheme='blue' variant='outline'>Submit</Button>
-//               </InputRightElement>
-//             </InputGroup>
-//           </FormControl>
-//         </VStack>
-//       </HStack>
-
-// if (!initial) {
-//   return <Error msg={error} />
-// }
-
-
-// ? <Error msg={error} />
-{/* <UserContent
-  avatar={avatar}
-  name={name}
-  userName={userName}
-  followers={followers}
-  following={following}
-  getRepoList={getRepoList}
-  getStarredList={getStarredList}
-/> */}
