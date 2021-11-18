@@ -13,14 +13,18 @@ export const Github = () => {
   const [following, setFollowing] = useState('')
   const [avatar, setAvatar] = useState('')
   const [repos, setRepos] = useState([])
+  const [repoURL, setRepoURL] = useState([])
   const [starred, setStarred] = useState([])
   const [userInput, setUserInput] = useState('')
   const [userInput2, setUserInput2] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const [error, setError] = useState(null)
+  const [showRepos, setShowRepos] = useState(false)
+  const [showStared, setShowStarred] = useState(false)
 
   useEffect(() => {
     inputRef.current?.focus()
+
   })
 
   const setData = ({
@@ -57,8 +61,15 @@ export const Github = () => {
     fetch(`https://api.github.com/users/${userInput2}/repos`)
       .then(res => res.json())
       .then(result => {
-        setRepos(Object.values(result))
+        Object.values(result)
+        setRepos(
+          result.map((repo: { name: string; html_url: string }) => ({
+            name: repo.name,
+            link: repo.html_url,
+          }))
+        )
       })
+    console.log(repos)
     setRepos([])
   }
 
@@ -89,6 +100,13 @@ export const Github = () => {
     getStarredList()
   }
 
+  function show(i: string) {
+    if (i === 'repo') {
+      setShowRepos(!showRepos)
+    }
+    setShowStarred(!showStared)
+  }
+
   if (initial) {
     return (
       <HStack spacing='6'>
@@ -108,25 +126,26 @@ export const Github = () => {
               userName={userName}
               followers={followers}
               following={following}
-              getRepoList={getRepoList}
-              getStarredList={getStarredList}
+              show={show}
             />
           }
         </VStack>
+        {showRepos &&
+          <Box
+            w='250px'
+            maxH='350px'
+            overflow='scroll'
+            // border='1px'
+            borderColor='gray.200'
+          >
+            <List>
+              {repos.map((index) => (
+                <ListItem key={index}>{index}</ListItem>
+              ))}
+            </List>
+          </Box>
+        }
         <Box
-          w='250px'
-          maxH='350px'
-          overflow='scroll'
-          // border='1px'
-          borderColor='gray.200'
-        >
-          <List>
-            {repos.map((repo, index) => (
-              <ListItem key={index}>{repo}</ListItem>
-            ))}
-          </List>
-        </Box>
-        {/* <Box
           w='300px'
           h='300px'
         >
@@ -147,7 +166,7 @@ export const Github = () => {
             <ListItem >starred</ListItem>
             <ListItem >starred</ListItem>
           </List>
-        </Box> */}
+        </Box>
       </HStack>
     )
   }

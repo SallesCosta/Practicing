@@ -6,11 +6,10 @@ type UserContentProps = {
   userName: string,
   followers: any,
   following: any,
-  getRepoList: () => void
-  getStarredList: () => void
+  show: any
 }
 
-export const UserContent = ({ avatar, name, userName, followers, following, getRepoList, getStarredList }: UserContentProps) => {
+export const UserContent = ({ show, avatar, name, userName, followers, following }: UserContentProps) => {
   return (
     <Container>
       <Image src={avatar} w='100%' />
@@ -18,8 +17,8 @@ export const UserContent = ({ avatar, name, userName, followers, following, getR
       <Text>usuário escolhido {userName}</Text>
       <Text>Follower {followers}</Text>
       <Text>Following {following}</Text>
-      <Button onClick={getRepoList} colorScheme='blue' variant='outline'>Repositórios</Button>
-      <Button onClick={getStarredList} colorScheme='blue' variant='outline'>Starreds</Button>
+      <Button onClick={() => show('repo')} colorScheme='blue' variant='outline'>Repositórios</Button>
+      {/* <Button onClick={getStarredList} colorScheme='blue' variant='outline'>Starreds</Button> */}
     </Container>
   )
 }
@@ -70,3 +69,7 @@ export const MyInput = ({ userInput, inputRef, handleSearch, handleConfirm, hand
     </HStack>
   )
 }
+
+
+
+
