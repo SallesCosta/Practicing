@@ -1,5 +1,5 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Flex } from '@chakra-ui/react'
 import { ChangeEventHandler, KeyboardEventHandler, MouseEventHandler, RefObject } from 'react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Flex } from '@chakra-ui/react'
 import { Sidebar } from './Components/sidebar/sidebar'
 import { LoginForm } from './Components/loginForm'
 import { Github } from './Components/github/github'
