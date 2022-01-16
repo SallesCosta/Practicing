@@ -21,6 +21,7 @@ export const Github = () => {
   const [error, setError] = useState(null)
   const [showRepos, setShowRepos] = useState(false)
   const [showStared, setShowStarred] = useState(false)
+  const [user, ]
 
   useEffect(() => {
     inputRef.current?.focus()

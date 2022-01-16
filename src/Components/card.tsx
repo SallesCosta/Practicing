@@ -10,7 +10,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard' // npm i copy-to-clipb
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { GrFormAdd } from 'react-icons/gr'
 import { Lista } from '../source/hooks'
-import { MyPDF } from './reports/pdf'
 
 export type CardProps = {
   AddItem: MouseEventHandler<HTMLButtonElement> & MouseEventHandler<Element>,
@@ -195,16 +194,6 @@ export function Card({
           </MenuList>
         </Menu>
       </Box>
-      <Button
-        onClick={MyPDF}
-        rightIcon={<GrFormAdd />}
-        colorScheme='green.400'
-        variant='outline'
-        size='lg'
-        ml='18px'
-        w='500px'
-      >Adicionar
-      </Button>
     </>
   )
 }
